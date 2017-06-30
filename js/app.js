@@ -3,8 +3,7 @@ var app = {
     this.sideNav.initialize();
   },
 
-  domain: "http://" + window.location.host + "/Systems/Dynamic Voting System V2/api/",
-
+  domain: `http://${window.location.host}/api/`,
   sideNav: {
     initialize: function(){
       $('.button-collapse').sideNav({
