@@ -153,21 +153,4 @@
     });
 })();
 
-{/*<h1 class="bold">1. For the PRESIDENT position?</h1>
-
-<div class="row">
-
-
-    <div class="col s12 m4">
-        <img src="resources/201310730.jpg" style="width: 100%" alt="">
-        <div class="divider"></div>
-        <input type="checkbox">
-        <p class="center">
-            <input type="checkbox" class="filled-in" id="student_id" checked="checked" />
-            <label for="student_id">Sammuel Lagat Apa</label>
-        </p>
-        <div class="divider"></div>
-    </div>
-
-
-</div>*/}
+{
