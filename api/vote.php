@@ -24,7 +24,7 @@
 
             $_SESSION['fld_voted'] = true;
             
-            $sql = "UPDATE tbl_accounts SET fld_voted = 1 WHERE fld_id = $student_id";
+            $sql = "UPDATE tbl_accounts SET fld_voted = 1 WHERE fld_id = '$student_id'";
             $conn->query($sql);
 
             die(json_encode(array("status"=>true, "message"=>"Successfully Voted")));
