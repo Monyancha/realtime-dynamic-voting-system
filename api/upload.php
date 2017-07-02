@@ -22,8 +22,9 @@
   if(!$conn->query($sql)){
     die(json_encode(array("status"=> false, "message"=>"Sorry, something went wrong while removing the database.")));
   }
-
-  $sql = "LOAD DATA INFILE '/xampp/htdocs/Systems/Dynamic Voting System V2/resources/db.csv' INTO TABLE tbl_accounts FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' (fld_id, fld_name, fld_course, fld_year_level)";
+  
+  $location = addslashes($_SERVER['DOCUMENT_ROOT']);
+  $sql = "LOAD DATA INFILE '$location/resources/db.csv' INTO TABLE tbl_accounts FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' (fld_id, fld_name, fld_course, fld_year_level)";
 
   if(!$conn->query($sql)){
 
