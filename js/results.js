@@ -89,7 +89,7 @@
             connect: function(){
                 $this = this;
 
-                var conn = new WebSocket('ws://127.0.0.1:8080');
+                var conn = new WebSocket(`ws://${window.location.hostname}:8080`);
                 conn.onopen = function(){
                     conn.onmessage = function(e){
                         $this.load_data(e.data);                    

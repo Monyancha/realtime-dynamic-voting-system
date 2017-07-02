@@ -2,7 +2,7 @@
     var my_votes = {};
     var user = JSON.parse(atob(sessionStorage.DVSV2));
     
-    var conn = new WebSocket('ws://127.0.0.1:8080');
+    var conn = new WebSocket(`ws://${window.location.hostname}:8080`);
     conn.onopen = function(){
         console.log("Connected to Websocket.");
     }
