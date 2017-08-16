@@ -6,7 +6,7 @@
       die("{\n\tmessage: Access is forbidden.\n}");
   }
 
-  $sql = "SELECT DISTINCT fld_course FROM tbl_accounts WHERE fld_account_type != 'administrator'";
+  $sql = "SELECT DISTINCT(fld_course) FROM tbl_accounts WHERE fld_account_type != 'administrator'";
   $result=$conn->query($sql);
 
   if($result->num_rows > 0){

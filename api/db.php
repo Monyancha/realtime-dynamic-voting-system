@@ -1,14 +1,11 @@
 <?php
-  session_start();
+  require('config.php');
   date_default_timezone_set("Asia/Manila");
 
-  // if($_SERVER['REQUEST_METHOD'] == 'GET' && !isset($_SESSION['fld_id'])){
-  //   notfound();
-  // }
   $db_name = 'db_dvsv2';
-  define('server', 'localhost');
-  define('user', 'root');
-  define('pass', '');
+  define('server', DB_HOST);
+  define('user', DB_USERNAME);
+  define('pass', DB_PASSWORD);
   define('db', $db_name);
   
 
@@ -52,7 +49,7 @@
       
       $tbl_candidates = "CREATE TABLE `tbl_candidates` (
         `candidate_id` int(11) NOT NULL,
-        `student_id` int(11) NOT NULL,
+        `student_id` varchar(50) NOT NULL,
         `position_id` int(11) NOT NULL,
         `candidate_image` text
       ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
@@ -68,7 +65,7 @@
       
       $tbl_votes = "CREATE TABLE `tbl_votes` (
         `vote_id` int(11) NOT NULL,
-        `student_id` int(11) NOT NULL,
+        `student_id` varchar(10) NOT NULL,
         `candidate_id` int(11) NOT NULL,
         `pos_id` int(11) NOT NULL
       ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
@@ -103,9 +100,14 @@
       $modify_tbl_votes = "ALTER TABLE `tbl_votes`
         MODIFY `vote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7";
       $conn->query($modify_tbl_votes);
-    
+
+      $modify_users = "INSERT INTO tbl_accounts SET fld_id= '" . ACCOUNT_USERNAME . "', fld_name = '" . ACCOUNT_NAME . "', fld_password= '" . md5(ACCOUNT_PASSWORD) . "', fld_account_type = 'administrator'";
+      $conn->query($modify_users);
     }
   }
+  
+  $update_users = "UPDATE tbl_accounts SET fld_id= '" . ACCOUNT_USERNAME . "', fld_name = '" . ACCOUNT_NAME . "', fld_password= '" . md5(ACCOUNT_PASSWORD) . "' WHERE fld_account_type = 'administrator'";
+  $conn->query($update_users);
 
   function notfound(){
     die(header("HTTP/1.1 404"));

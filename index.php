@@ -38,7 +38,7 @@
 
           <div class="menu circle white valign-wrapper">
             <div class="container center">
-              <a href="results-public.php" class="valign">
+              <a href="results.php" class="valign">
                 <i class="material-icons medium">poll</i>
                 <br>
                 Election Results</a>

@@ -375,6 +375,7 @@
             url: `${app.domain}fetch_courses.php`,
             type: 'GET',
             success: function(res){
+              console.log(res);
               var courseFragments = `<option class="course_option" value="ALL">ALL</option>`;
               res.forEach(function(course){
                 courseFragments += `<option class="course_option" value="${course.fld_course}">${course.fld_course}</option>`;

@@ -45,6 +45,7 @@
     $sql = "DELETE FROM tbl_positions WHERE pos_id=$id";
 
     if($conn->query($sql)){
+		$conn->query("DELETE FROM tbl_candidates WHERE position_id=$id");
       echo json_encode(true);
     }else{
       echo json_encode(false);

@@ -10,14 +10,16 @@
 
             checkifcounted: function(index){
                 if(index <= 0){
-                    return 'grey';
+                    return false;
                 }else{
-                    return 'red';
+                    return true;
+
                 }
             },
 
             load_data: function(data){
                 var positions_data = {};
+                var ranking = 0, rank, name;
                 $this = this;
 
                 var results = JSON.parse(data);
@@ -33,7 +35,6 @@
                     }
                 });
 
-
                 for(i=0; i < results.length; i++){
                     c= results[i];
                     percentage = (+c.total_votes / +total_per_position[c.position_name]) * 100;
@@ -45,30 +46,46 @@
                         positions_data[c.position_name] = +c.max_vote;
                     }
 
-                    result_fragments += `
-                    <div class="card">
-                        <div class="${$this.checkifcounted(positions_data[c.position_name])} avatar card-content white-text">
-                            <div class="row">
-                                <div class="col m2 s4">
-                                    <img src="${c.student_image || 'resources/profile.jpg'}" alt="" class="" style="width: 100%">    
-                                </div>
-                                <div class="col m10 s8">
-                                    <span class="bold">${c.student_name}</span>
-                                    <br>
-                                    <small>Position: ${c.position_name}</small>
-                                    <br>
-                                    <small>Total Votes: ${c.total_votes} vote(s)</small>
+                    if($this.checkifcounted(positions_data[c.position_name])){
+                        rank = ++ranking;
+                        name = c.student_name;
+                    }else{
+                        rank = '';
+                        name = c.student_name.strike();
+                    }
 
-                                    <div class="progress" style="height: 22px;">
-                                        <div class="determinate blue darken-2" style="width: ${percentage}%;">
-                                            <span class="right"><small>${percentage.toFixed(2)}%&nbsp;</small></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                    `;
+
+                    result_fragments += `<tr>
+                        <td>${rank}</td>
+                        <td>${name}</td>
+                        <td>${c.position_name}</td>
+                        <td>${c.total_votes}</td>
+                    </tr>`;
+
+                    // result_fragments += `
+                    // <div class="card">
+                    //     <div class="${$this.checkifcounted(positions_data[c.position_name])} avatar card-content white-text">
+                    //         <div class="row">
+                    //             <div class="col m2 s4">
+                    //                 <img src="${c.student_image || 'resources/profile.jpg'}" alt="" class="" style="width: 100%">    
+                    //             </div>
+                    //             <div class="col m10 s8">
+                    //                 <span class="bold">${c.student_name}</span>
+                    //                 <br>
+                    //                 <small>Position: ${c.position_name}</small>
+                    //                 <br>
+                    //                 <small>Total Votes: ${c.total_votes} vote(s)</small>
+
+                    //                 <div class="progress" style="height: 22px;">
+                    //                     <div class="determinate blue darken-2" style="width: ${percentage}%;">
+                    //                         <span class="right"><small>${percentage.toFixed(2)}%&nbsp;</small></span>
+                    //                     </div>
+                    //                 </div>
+                    //             </div>
+                    //         </div>
+                    //     </div>
+                    // </div> 
+                    // `;
 
                     positions_data[c.position_name] = positions_data[c.position_name] - 1;
                 }

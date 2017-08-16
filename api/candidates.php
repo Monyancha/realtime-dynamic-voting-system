@@ -13,7 +13,6 @@
         if(!isset($_POST['student_id']) OR !isset($_POST['position_id'])){
             echo json_encode(false);
         }
-
         $student_id = mysqli_real_escape_string($conn, $_POST['student_id']);
         $position_id = mysqli_real_escape_string($conn, $_POST['position_id']);
         $candidate_image = null;

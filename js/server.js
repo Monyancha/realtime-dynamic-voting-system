@@ -34,7 +34,7 @@ wss.on('connection', function(ws){
         //Broadcast data
         wss.clients.forEach(function(client){
             if(client.readyState === WebSocket.OPEN){
-                
+                //fetch votes result
                 conn().query("SELECT tbl_candidates.student_id, tbl_positions.pos_max_vote, tbl_accounts.fld_name, tbl_positions.pos_name, candidate_image, COUNT(tbl_votes.student_id) AS total_votes FROM tbl_candidates LEFT JOIN tbl_votes ON tbl_candidates.candidate_id = tbl_votes.candidate_id LEFT JOIN tbl_accounts ON tbl_candidates.student_id = tbl_accounts.fld_id LEFT JOIN tbl_positions ON tbl_positions.pos_id = tbl_candidates.position_id GROUP BY tbl_candidates.candidate_id ORDER BY tbl_candidates.position_id, total_votes DESC", function(err, rows, fields){
                     var obj = [];
                     for(var i=0; i < rows.length; i++){
@@ -47,8 +47,9 @@ wss.on('connection', function(ws){
                             total_votes: rows[i].total_votes
                         });
                     }
-                    conn().end();
+
                     client.send(JSON.stringify(obj));
+                    conn().end();
                 });
                 
             }

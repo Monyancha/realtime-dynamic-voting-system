@@ -1,0 +1,14 @@
+Step 1: Setup Configuration
+	--  Edit config.php
+	-- Modify database's username
+	-- Modify database's password
+	-- Modify application's administrator account
+	-- Modify application's administrator account
+
+Step2: Starting the server
+	-- Launch start_apache_server.bat
+	-- Launch start_socket_server.bat
+	--Don't close the cmd windows
+
+Step3: Uploading Student Records
+	-- Sample csv file is in resouces/folder/db.csv
